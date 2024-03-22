@@ -7,19 +7,24 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
-	"gorm.io/gorm"
 )
 
-var db1 *gorm.DB
+var CasbinSrv *CasbinService
 
 type CasbinService struct {
 	Enforcer *casbin.Enforcer
 	Adapter  *gormadapter.Adapter
 }
 
+// 初始化cabin服务
+func InitCasbinService() {
+	if CasbinSrv == nil {
+		CasbinSrv, _ = NewCasbinService()
+	}
+}
+
 func NewCasbinService() (*CasbinService, error) {
-	db1, _ = db.DBEngin()
-	a, err := gormadapter.NewAdapterByDB(db1)
+	a, err := gormadapter.NewAdapterByDB(db.DB)
 	if err != nil {
 		return nil, err
 	}

@@ -13,9 +13,10 @@ func RegisterRouter(router *gin.Engine) {
 
 func routerAuth(engine *gin.Engine) {
 	group := engine.Group("/")
-	group.Use(NewCasbinAuth(&service.CasbinService{}))
+	group.Use(NewCasbinAuth(service.CasbinSrv))
 	{
 		con := &controller.AuthController{}
 		group.POST("/casbin/rolepolicy", con.UpdatePolicy)
+		group.DELETE("/casbin/rolepolicy", con.DeletePolicy)
 	}
 }
