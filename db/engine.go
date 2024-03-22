@@ -1,11 +1,18 @@
 package db
 
 import (
+	"log"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
+var db1 *gorm.DB
+
 func DBEngin() (db *gorm.DB, err error) {
+	if db1 != nil {
+		return db1, nil
+	}
 	db1, err1 := gorm.Open(mysql.New(mysql.Config{
 		DSN:                       "root:czy123456@tcp(127.0.0.1:3306)/gorm?charset=utf8&parseTime=True&loc=Local", // DSN data source name
 		DefaultStringSize:         256,                                                                             // string 类型字段的默认长度
@@ -14,5 +21,6 @@ func DBEngin() (db *gorm.DB, err error) {
 		DontSupportRenameColumn:   true,                                                                            // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
 		SkipInitializeWithVersion: false,
 	}), &gorm.Config{})
+	log.Fatalln("init db ....")
 	return db1, err1
 }

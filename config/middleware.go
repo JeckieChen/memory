@@ -2,13 +2,14 @@ package config
 
 import (
 	"log"
+	"memory/service"
 
 	"github.com/gin-gonic/gin"
 )
 
-func NewCasbinAuth(srv *CasbinService) gin.HandlerFunc {
+func NewCasbinAuth(srv *service.CasbinService) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		err := srv.enforcer.LoadPolicy()
+		err := srv.Enforcer.LoadPolicy()
 		if err != nil {
 			ctx.String(500, err.Error())
 			ctx.Abort()
@@ -20,7 +21,7 @@ func NewCasbinAuth(srv *CasbinService) gin.HandlerFunc {
 		url := ctx.Request.URL.Path
 
 		log.Println(username, url, ctx.Request.Method, jwt)
-		ok, err := srv.enforcer.Enforce(username, ctx.Request.URL.Path, ctx.Request.Method)
+		ok, err := srv.Enforcer.Enforce(username, ctx.Request.URL.Path, ctx.Request.Method)
 		if err != nil {
 			ctx.String(500, err.Error())
 			ctx.Abort()
