@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"memory/service"
+	"memory/internal/service"
 
 	"github.com/gin-gonic/gin"
 )

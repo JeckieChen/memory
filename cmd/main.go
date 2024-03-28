@@ -1,9 +1,9 @@
 package main
 
 import (
-	"memory/config"
-	"memory/db"
-	"memory/service"
+	"memory/internal/db"
+	"memory/internal/router"
+	"memory/internal/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +17,6 @@ func main() {
 	db.InitDBEngin()
 	service.InitCasbinService()
 	engine := gin.Default()
-	config.RegisterRouter(engine)
+	router.RegisterRouter(engine)
 	engine.Run(":8000")
 }

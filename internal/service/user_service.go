@@ -2,8 +2,8 @@ package service
 
 import (
 	"fmt"
-	"memory/db"
-	"memory/util"
+	"memory/internal/db"
+	"memory/internal/util"
 )
 
 type LoginInfo struct {

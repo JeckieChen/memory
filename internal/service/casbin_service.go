@@ -1,8 +1,8 @@
 package service
 
 import (
-	"memory/db"
-	"memory/util"
+	"memory/internal/db"
+	"memory/internal/util"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"

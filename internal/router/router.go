@@ -1,8 +1,9 @@
-package config
+package router
 
 import (
-	"memory/controller"
-	"memory/service"
+	"memory/internal/controller"
+	"memory/internal/middleware"
+	"memory/internal/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +15,8 @@ func RegisterRouter(router *gin.Engine) {
 
 func routerAuth(engine *gin.Engine) {
 	group := engine.Group("/")
-	group.Use(NewCasbinAuth(service.CasbinSrv))
+
+	group.Use(middleware.NewCasbinAuth(service.CasbinSrv))
 	{
 		con := &controller.AuthController{}
 		group.POST("/casbin/rolepolicy", con.UpdatePolicy)

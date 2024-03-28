@@ -1,7 +1,7 @@
-package config
+package middleware
 
 import (
-	"memory/service"
+	"memory/internal/service"
 
 	"github.com/gin-gonic/gin"
 )
