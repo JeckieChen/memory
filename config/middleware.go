@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"memory/service"
 
 	"github.com/gin-gonic/gin"
@@ -17,10 +16,8 @@ func NewCasbinAuth(srv *service.CasbinService) gin.HandlerFunc {
 		}
 		// 简便起见，假设用户从url传递 /xxxx?username=leo，实际应用可以结合jwt等鉴权
 		username, _ := ctx.GetQuery("username")
-		jwt := ctx.GetHeader("token")
-		url := ctx.Request.URL.Path
+		// jwtToken := ctx.GetHeader("token")
 
-		log.Println(username, url, ctx.Request.Method, jwt)
 		ok, err := srv.Enforcer.Enforce(username, ctx.Request.URL.Path, ctx.Request.Method)
 		if err != nil {
 			ctx.String(500, err.Error())
