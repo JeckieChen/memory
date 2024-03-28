@@ -2,6 +2,6 @@ package db
 
 type User struct {
 	Id       uint   `gorm:"primaryKey"`
-	Username string `gorm:"column:v0"`
-	Password string `gorm:"column:v0"`
+	Username string `gorm:"column:username"`
+	Password string `gorm:"column:password"`
 }
